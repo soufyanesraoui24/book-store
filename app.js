@@ -2,7 +2,9 @@ const express = require('express')
 const logger = require('./middlewares/logger');
 const { notFound, errorHandler } = require('./middlewares/errors');
 const connectToDB = require('./config/connectToDB');
+const ejs = require('ejs');
 require('dotenv').config()
+
 
 
 // connect to db
@@ -14,11 +16,14 @@ app.use(express.json());
 //logger middleware
 app.use(logger);
 
+app.set('view engine','ejs');
+
 // routes
 app.use('/api/books',require('./routes/books'));
 app.use('/api/authors',require('./routes/authors'));
 app.use('/api/auth',require('./routes/auth'));
 app.use('/api/users',require('./routes/users'));
+app.use('/password',require('./routes/password'));
 
 
 
