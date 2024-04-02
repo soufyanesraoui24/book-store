@@ -12,11 +12,12 @@ const getAllBooks= asyncHandler(async(req,res)=>{
     let books;
     if(minPrice && maxPrice){
         books = await Book.find({price:{ $gte:minPrice, $lt:maxPrice}})
-        .populate('author','_id firstName lastName');
+        .populate('author',["_id", "firstName", "lastName"]);
     }
     else{
-        books = await Book.find().populate('author','_id firstName lastName');
+        books = await Book.find().populate('author',["_id", "firstName", "lastName"]);
     }
+res.status(200).json(books);
 })
 
 /**
